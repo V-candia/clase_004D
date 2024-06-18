@@ -2,10 +2,10 @@ from os import system
 lista_trabajador = []
 def menu_principal():
     opciones = {
-        '1': ('registrar trabajador', accion1),
-        '2': ("listar todos los trabajadores ", accion2),
-        '3': ('imprimir plantilla de sueldos ', accion3),
-        '4': ('Salir del programa', salir)
+        '1': ('Registrar trabajador', reg_trabajador),
+        '2': ('Listar todos los trabajadores', lis_trabajador),
+        '3': ('Imprimir planilla de sueldos', imp_trabajador),
+        '4': ('Salir del Programa', salir)
     }
 
     generar_menu(opciones, '4')
@@ -33,15 +33,38 @@ def ejecutar_opcion(opcion, opciones):
     opciones[opcion][1]()
 
 
-def accion1():
-    print('Has elegido la opción 1')
+def reg_trabajador():
+    system("cls")
+    nombres = input("Ingrese  nombre  y Apellido del trabajador ")
+    cargo   = input("Ingrese el cargo del trabajador ")
+    sueldo_bruto = int(input("Ingrese el sueldo bruto del Trabajador "))
+    desc_salud =  int(round(sueldo_bruto *  7/100,0))
+    desc_afp =  int(round(sueldo_bruto*12/100,0))
+    liquido = sueldo_bruto - desc_salud - desc_afp
+    lista_trabajador.append({
+                    "nombres": nombres,
+                    "cargo": cargo,
+                    "sueldo_bruto": sueldo_bruto,
+                    "desc_salud": desc_salud,
+                    "desc_afp": desc_afp,
+                    "liquido": liquido,
+                })
+    print(lista_trabajador)
+    input()    
+    return 
 
 
-def accion2():
+def lis_trabajador():
     print('Has elegido la opción 2')
+    system("cls")
+    print(f"nombres\t           cargo\t sueldo_bruto\t  desc_salud\t    desc_afp\t  liquido")
+    for trabajador in lista_trabajador:
+        print(f"{trabajador["nombres"]}\t   {trabajador["cargo"]}\t   {trabajador["sueldo_bruto"]}\t    {trabajador["desc_salud"]}\t    {trabajador["desc_afp"]}\t  {trabajador["liquido"]}" )
+    input()
+    return
 
 
-def accion3():
+def imp_trabajador():
     print('Has elegido la opción 3')
 
 
